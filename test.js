@@ -16,6 +16,7 @@ it('should return false when the file is not a dotfile', function () {
   assert.equal(isDotfile('a/b.c.d/e.js'), false);
   assert.equal(isDotfile('a/b.js'), false);
   assert.equal(isDotfile('a/.b/c/a.js'), false);
+  assert.equal(isDotfile('.git/foo'), false);
   assert.equal(isDotfile('.gitignore/foo'), false);
 });
 
