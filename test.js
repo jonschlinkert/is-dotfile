@@ -7,23 +7,35 @@
 
 'use strict';
 
-/* deps: mocha */
+require('mocha');
 var assert = require('assert');
 var isDotfile = require('./');
 
-it('should return false when the file is not a dotfile', function () {
-  assert.equal(isDotfile('a/b/c/d/e.js'), false);
-  assert.equal(isDotfile('a/b.c.d/e.js'), false);
-  assert.equal(isDotfile('a/b.js'), false);
-  assert.equal(isDotfile('a/.b/c/a.js'), false);
-  assert.equal(isDotfile('.git/foo'), false);
-  assert.equal(isDotfile('.gitignore/foo'), false);
-});
+describe('is-dotfile', function() {
+  var truthy = [
+    'a/b/c/d/e.js',
+    'a/b.js',
+    'a/.git/c/a.js',
+    '.github/contributor.md',
+    '.git/foo',
+  ].forEach(function(filepath) {
+    it('should be false: ' + filepath, function() {
+      assert(!isDotfile(filepath));
+    });
+  });
 
-it('should return true when the file is a dotfile', function () {
-  assert.equal(isDotfile('a/b/c/d/.gitignore'), true);
-  assert.equal(isDotfile('a/.b/c/.gitignore'), true);
-  assert.equal(isDotfile('a/.gitignore'), true);
-  assert.equal(isDotfile('.gitignore'), true);
-  assert.equal(isDotfile('/.gitignore'), true);
+  var falsey = [
+    '.git',
+    '.travis.yml',
+    '.editorconfig',
+    '/.git',
+    'a/b.c.d/e.js/.git',
+    'a/.b/c/.gitignore',
+    'a/.gitignore',
+    'a/b/c/d/.gitignore',
+  ].forEach(function(filepath) {
+    it('should be true: ' + filepath, function() {
+      assert(isDotfile(filepath));
+    });
+  });
 });
