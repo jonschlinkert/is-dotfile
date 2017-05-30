@@ -1,7 +1,7 @@
 {
   "name": "is-dotfile",
   "description": "Return true if a file path is (or has) a dotfile. Returns false if the path is a dot directory.",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "homepage": "https://github.com/jonschlinkert/is-dotfile",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
@@ -65,5 +65,8 @@
     "lint": {
       "reflinks": true
     }
+  },
+  "dependencies": {
+    "dotfile-regex": "^0.1.2"
   }
 }
