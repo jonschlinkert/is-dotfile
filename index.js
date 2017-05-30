@@ -5,10 +5,8 @@
  * Released under the MIT License.
  */
 
+var dotfileRegex = require('dotfile-regex');
+
 module.exports = function(str) {
-  if (str.charCodeAt(0) === 46 /* . */ && str.indexOf('/', 1) === -1) {
-    return true;
-  }
-  var slash = str.lastIndexOf('/');
-  return slash !== -1 ? str.charCodeAt(slash + 1) === 46  /* . */ : false;
+  return dotfileRegex().test(str);
 };
